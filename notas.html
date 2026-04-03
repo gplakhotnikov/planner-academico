@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Notas do Aluno - Planner Acadêmico</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="https://i.imgur.com/lTc6hHY.png" alt="Logotipo UNIRIO">
+      </a>
+      <span class="titulo-site">PLANNER ACADÊMICO</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="agenda.html">Agenda</a></li>
+      <li><a href="notas.html">Notas</a></li>
+      <li><a href="desempenho.html">Desempenho</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Notas do Aluno</h1>
+
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Disciplina</th>
+            <th>Prova 1</th>
+            <th>Prova 2</th>
+            <th>Projeto</th>
+            <th>Prova Final</th>
+            <th>Média Final</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Algebra Linear</td>
+            <td>8.5</td>
+            <td>7.0</td>
+            <td>-</td>
+            <td>-</td>
+            <td>7.8</td>
+          </tr>
+          <tr>
+            <td>Projeto Integrador I</td>
+            <td>-</td>
+            <td>-</td>
+            <td>9.5</td>
+            <td>-</td>
+            <td>9.5</td>
+          </tr>
+          <tr>
+            <td>Técnicas de Programação</td>
+            <td>6.0</td>
+            <td>8.0</td>
+            <td>7.5</td>
+            <td>-</td>
+            <td>7.2</td>
+          </tr>
+          <tr>
+            <td>Gestão de Processos de Negócios</td>
+            <td>9.0</td>
+            <td>8.5</td>
+            <td>-</td>
+            <td>-</td>
+            <td>8.8</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="form-section">
+      <h3>Gerenciar Disciplinas e Notas</h3>
+      
+      <div class="form-row">
+        <input type="text" id="nova-disciplina" placeholder="Nome da nova disciplina">
+        <button type="button" class="btn-add">Adicionar Disciplina</button>
+      </div>
+
+      <br>
+
+      <div class="form-row">
+        <select id="select-disciplina">
+          <option value="">Selecione a Disciplina</option>
+          <option>Algebra Linear</option>
+          <option>Projeto Integrador I</option>
+          <option>Técnicas de Programação</option>
+          <option>Gestão de Processos de Negócios</option>
+        </select>
+
+        <select id="select-tipo">
+          <option value="">Tipo de Avaliação</option>
+          <option>Prova 1</option>
+          <option>Prova 2</option>
+          <option>Projeto</option>
+          <option>Prova Final</option>
+        </select>
+
+        <input type="number" id="valor-nota" placeholder="Nota" step="0.1" min="0" max="10">
+        
+        <button type="button" class="btn-add">Adicionar Nota</button>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Coelho, Plakhotnikov, Trindade. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
