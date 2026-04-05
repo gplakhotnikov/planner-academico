@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório de Desempenho</title>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <a href="https://i.imgur.com/lTc6hHY.png">
+        <img src="https://i.imgur.com/lTc6hHY.png" alt="Logotipo UNIRIO">
+      </a>
+      <span class="titulo-site">PLANNER ACADÊMICO</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#">Agenda</a></li>
+      <li><a href="#">Notas</a></li>
+      <li><a href="#">Desempenho</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <h1>Relatório de Desempenho</h1>
+
+    <section>
+      <h2>Médias por Disciplina</h2>
+      
+      <div class="linha"><span>AL</span><div class="barra"><div class="aluno" style="width:80%">8.0</div></div></div>
+      <div class="linha"><span>PI1</span><div class="barra"><div class="aluno" style="width:95%">9.5</div></div></div>
+      <div class="linha"><span>TP</span><div class="barra"><div class="aluno" style="width:72%">7.2</div></div></div>
+      <div class="linha"><span>GPN</span><div class="barra"><div class="aluno" style="width:88%">8.8</div></div></div>
+    </section>
+
+    <section>
+      <h2>Comparação de média com a Turma</h2>
+
+      <div class="linha"><span>AL</span><div class="barra">
+        <div class="turma" style="width:70%">7.0</div>
+        <div class="aluno" style="width:80%">8.0</div>
+      </div></div>
+
+      <div class="linha"><span>PI1</span><div class="barra">
+        <div class="turma" style="width:75%">7.5</div>
+        <div class="aluno" style="width:95%">9.5</div>
+      </div></div>
+
+      <div class="linha"><span>TP</span><div class="barra">
+        <div class="turma" style="width:85%">8.5</div>
+        <div class="aluno" style="width:72%">7.2</div>
+      </div></div>
+
+      <div class="linha"><span>GPN</span><div class="barra">
+        <div class="turma" style="width:72%">7.2</div>
+        <div class="aluno" style="width:88%">8.8</div>
+      </div></div>
+    </section>
+
+<section>
+      <h2>Distribuição de Presenças e Faltas</h2>
+      <div class="pizza-container">
+        <div class="pizza-semestre"></div>
+
+        <div class="legenda-grid">
+          <div class="legenda-item"><span class="caixa-cor presenca"></span> Presenças: 50</div>
+          <div class="legenda-item"><span class="caixa-cor cor-al"></span> Faltas AL: 2</div>
+          <div class="legenda-item"><span class="caixa-cor cor-pi"></span> Faltas PI1: 1</div>
+          <div class="legenda-item"><span class="caixa-cor cor-tp"></span> Faltas TP: 3</div>
+          <div class="legenda-item"><span class="caixa-cor cor-gpn"></span> Faltas GPN: 2</div>
+        </div>
+      </div>
+    </section>
+    
+<section>
+      <h2>Proximidade do Limite de Faltas</h2>
+      <p class="aviso-limite">
+        O limite é de 25% de faltas (8 para matérias de 2 aulas/semana, 4 para PI1).
+      </p>
+      
+      <div class="limite-container">
+        <div class="coluna-falta">
+          <div class="trilho-vertical">
+            <div class="preenchimento-falta" style="height: 25%;"></div>
+          </div>
+          <span class="label-materia">AL</span>
+          <span class="contagem">2/8</span>
+        </div>
+
+        <div class="coluna-falta">
+          <div class="trilho-vertical">
+            <div class="preenchimento-falta especial" style="height: 25%;"></div>
+          </div>
+          <span class="label-materia">PI1</span>
+          <span class="contagem">1/4</span>
+        </div>
+
+        <div class="coluna-falta">
+          <div class="trilho-vertical">
+            <div class="preenchimento-falta" style="height: 37.5%;"></div>
+          </div>
+          <span class="label-materia">TP</span>
+          <span class="contagem">3/8</span>
+        </div>
+
+        <div class="coluna-falta">
+          <div class="trilho-vertical">
+            <div class="preenchimento-falta" style="height: 25%;"></div>
+          </div>
+          <span class="label-materia">GPN</span>
+          <span class="contagem">2/8</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+      <footer>
+      <p>&copy; 2026 Coelho, Plakhotnikov, Trindade. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
