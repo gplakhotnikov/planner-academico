@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8">
+  <title>Calendario</title>
+</head>
+ 
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="https://i.imgur.com/lTc6hHY.png">
+        <img src="https://i.imgur.com/lTc6hHY.png" alt="Logotipo UNIRIO">
+      </a>
+      <span class="titulo-site">PLANNER ACADÊMICO</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Agenda</a></li>
+      <li><a href="#">Notas</a></li>
+      <li><a href="#">Desempenho</a></li>
+    </ul>
+  </nav>
+
+  <div class ="agenda">
+    <div class="tabela">
+      <div class="data">
+        <button>&lt;</button>
+        <button>&gt;</button>
+        <span id = "mes">Abril</span>
+        <span id = "ano">2026</span>
+      </div>
+        
+      <div class="semana"> 
+        <div>Domingo</div>
+        <div>Segunda</div>
+        <div>Terça</div>
+        <div>Quarta</div>
+        <div>Quinta</div>
+        <div>Sexta</div>
+        <div>Sábado</div>
+      </div>
+      
+      <div class="dias">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span>1</span>
+        <span>2</span>
+        <span>
+          3
+          <div class = "feriados">Paixão de Cristo</div>  
+        </span>
+        <span>4</span>
+        <span>5
+          <div class = "feriados">Domingo de Páscoa</div>  
+        </span>
+        <span>6</span>
+        <span>7</span>
+        <span>8</span>
+        <span>9
+          <div class = "trabalhos">Trabalho de TP</div>
+        </span>
+        <span>
+          10
+          <div class = "trabalhos">Trabalho de PI1</div>
+        </span>
+        <span>11</span>
+        <span>12</span>
+        <span>13</span>
+        <span>14</span>
+        <span>15</span>
+        <span>16</span>
+        <span>17
+          <div class = "trabalhos">Prova de PI1</div>
+        </span>
+        <span>18</span>
+        <span>19</span>
+        <span>20</span>
+        <span>21
+          <div class = "feriados">Tiradentes</div>  
+        </span>
+        <span>22
+          <div class = "trabalhos">Prova de GPN</div>
+        </span>
+        <span>23</span>
+        <span>24</span>
+        <span>25</span>
+        <span>26</span>
+        <span>27
+          <div class = "trabalhos">Prova de AL</div>
+        </span>
+        <span>28</span>
+        <span>29</span>
+        <span>30</span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    
+    <div class = "funcionalidades">
+      <div class="minicalendario">
+        <div class = "data-atual">
+          <button id = "anterior">&lt;</button>
+          <span>Abril de 2026</span>
+          <button id = "proximo">&gt;</button>
+        </div>
+        
+        <div class="semana-minicalendario"> 
+        <div>D</div>
+        <div>S</div>
+        <div>T</div>
+        <div>Q</div>
+        <div>Q</div>
+        <div>S</div>
+        <div>S</div>
+      </div>
+
+        <div class="dias-minicalendario">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        <span>7</span>
+        <span>8</span>
+        <span>9</span>
+        <span class ="hoje">10</span>
+        <span>11</span>
+        <span>12</span>
+        <span>13</span>
+        <span>14</span>
+        <span>15</span>
+        <span>16</span>
+        <span>17</span>
+        <span>18</span>
+        <span>19</span>
+        <span>20</span>
+        <span>21</span>
+        <span>22</span>
+        <span>23</span>
+        <span>24</span>
+        <span>25</span>
+        <span>26</span>
+        <span>27</span>
+        <span>28</span>
+        <span>29</span>
+        <span>30</span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class = "criar">
+      <ul>
+        <li class ="adicionar">
+          <button class = "topo">Adicionar&#9660</button>
+          <div class = "lista">
+            <button>+ Evento</button>
+            <button>+ Tarefa</button>
+          </div>
+        </li>
+      <ul>
+    </div>
+    <div class = "exibicao">
+      <div></div>
+      <div class ="feriado" ><input type = "checkbox" checked>Feriados</input></div>
+      <div class ="tarefa"><input type = "checkbox" checked >PI1</input></div>
+      <div class ="tarefa"><input type = "checkbox" checked>GPN</input></div>
+      <div class ="tarefa"><input type = "checkbox" checked>AL</input></div>
+    </div>
+  </div>
+</div>
+
+  <footer>
+    <p>&copy; 2026 Coelho, Plakhotnikov, Trindade. Todos os direitos reservados.</p>
+    </footer>
+</body>
+  
+  
