@@ -258,6 +258,232 @@ th {
   max-width: 100px;
 }
 
+/* agenda */
+.agenda{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  width: 1200px;
+  height: auto;
+  border-radius: 1%;
+  background-color: rgb(255, 255, 255);
+}
+/* calendario */
+.tabela{
+  width: 80%;
+  border: 1px solid #43444431;
+  border-radius: 2%;
+  overflow: hidden;
+}
+
+.data{
+  background-color: #f5f5f5;
+  color: #007bff;
+  padding: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.data button{
+  margin-left: 5px;
+  border-radius: 45%;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.data span{
+  margin-left: 5px;
+}
+
+.semana {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    color: rgb(63, 60, 60);
+    font-weight: bold;
+}
+.semana div {
+    text-align: center;
+    width: 100%;
+    border-right: #838383 1px solid;
+    border-bottom: #838383 1px solid;
+}
+.semana div:last-child {
+    border-right: #8b8d8d00 1px solid;
+}
+
+.dias{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+}
+.dias span{
+  width: auto;
+  display: flex;
+  height: 70px;
+  background-color: rgb(255, 255, 255);
+  border-right: #838383 1px solid;
+  border-bottom: #838383 1px solid;
+}
+.dias span:nth-child(7n){
+  border-right: none;
+}
+.dias span::nth-child(-n+7){
+  border-bottom: none;
+}
+
+.feriados{
+  display: block;
+  align-self: center;
+  text-align: center;
+  border-radius: 10px;
+  width: 110px;
+  font-size: 0.8em;
+  background-color: rgb(185, 255, 232);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.trabalhos{
+  display: block;
+  align-self: center;
+  text-align: center;
+  border-radius: 10px;
+  width: 110px;
+  font-size: 0.8em;
+  background-color: rgb(250, 222, 203);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+/* funcoes ao lado do calendario */
+.funcionalidades{
+  background-color: rgb(255, 255, 255);
+  width: 20%;
+  overflow-y: auto;
+}
+.funcionalidades::-webkit-scrollbar-track{
+  background-color: #838383;  
+  border-radius: 10px;
+  width: 8px;
+  background: transparent;
+}
+.minicalendario{
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.data-atual{
+  display: flex;
+  align-items: center;       
+  font-weight: 400;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.data-atual button{
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+/* minicalendario */
+.semana-minicalendario{
+  display: flex;
+  width: 100%;
+}
+
+.semana-minicalendario div{
+  width: 100%;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.dias-minicalendario{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+}
+
+.dias-minicalendario span{
+  display: flex;
+  padding: 2px;
+  justify-content: center;
+  margin-top: 2px;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.dias-minicalendario span:hover{
+  background: #85b8ee;
+}
+.hoje{
+  background: #007bff;
+}
+/* adicionar tarefa/evento */
+.criar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.criar ul{
+  list-style: none;
+  padding: 0;
+}
+
+.adicionar{
+  cursor: pointer;
+}
+
+.adicionar button{
+  display: block;
+  cursor: pointer;
+  width: 150px;
+  height: 25px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.lista{
+  position: absolute;
+  display: none;
+}
+.adicionar:hover .lista{
+  display: block;
+}
+/* exibicao */
+.exibicao{
+  margin-left: 20px;
+  justify-self: left;
+  align-items: center;
+  display: block;
+}
+
+.exibicao div {
+  margin-top: 5px;
+  border-radius: 10px;
+  width: 100px;
+  font-weight: 300;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.feriado {
+  background: rgb(185, 255, 232);
+}
+
+.tarefa{
+  background: rgb(250, 222, 203);
+}
+
 /* RODAPÉ */
 footer {
   background: #d9d9d9;
@@ -265,3 +491,4 @@ footer {
   padding: 15px;
   color: #838383;
 }
+
