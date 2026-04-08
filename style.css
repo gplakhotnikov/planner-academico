@@ -50,9 +50,6 @@ body {
   color: #cfcfcf;
 }
 
-
-/* CONTEÚDO */
-
 /* CADASTRO */
 .page {
   display: flex;
@@ -283,7 +280,7 @@ section {
   width: 80px;
 }
 
-.trilho-vertical {
+.barra-vertical {
   width: 40px;
   height: 160px;
   background: #f0f0f0;
@@ -590,4 +587,3 @@ footer {
   padding: 15px;
   color: #838383;
 }
-
