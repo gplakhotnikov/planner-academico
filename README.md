@@ -83,3 +83,5 @@ Comparação Aluno vs. Turma: Barras sobrepostas para análise de competitividad
 Distribuição de Presenças/Faltas: Gráfico de pizza que segmenta as ausências por disciplina.
 Limite de Faltas: Indicadores de "trilho vertical" que mostram visualmente a proximidade do teto de 25% de faltas.
 Fluxo: Esta tela é alimentada pelos dados inseridos na tela de "Notas" e pelos registros de presença. É uma tela de consulta final para tomada de decisão estratégica do estudante.
+
+(c) Matheus Coelho, Grigory Plakhotnikov e Thiago Trindade
