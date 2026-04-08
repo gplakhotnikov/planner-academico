@@ -391,11 +391,16 @@ th {
 
 .data button{
   margin-left: 5px;
+  width: 5px;
+  height: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 45%;
   border: none;
   cursor: pointer;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
 .data span{
@@ -546,8 +551,10 @@ th {
 }
 
 .adicionar button{
-  display: block;
+  display: flex;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
   width: 150px;
   height: 25px;
   border: none;
@@ -563,18 +570,27 @@ th {
   display: block;
 }
 /* exibicao */
+
 .exibicao{
-  margin-left: 20px;
-  justify-self: left;
-  align-items: center;
   display: block;
+  margin-left: 20px;
+}
+.exibicao span input[type="checkbox"] {
+    margin: 0;              
+    cursor: pointer;          
+    width: 16px;              
+    height: 16px;             
 }
 
-.exibicao div {
+.exibicao span {
+  display: flex;
+  align-items: center;
+  justify-self: start;
   margin-top: 5px;
   border-radius: 10px;
   width: 100px;
-  font-weight: 300;
+  padding: 5px;
+  gap: 5px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
