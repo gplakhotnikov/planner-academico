@@ -338,20 +338,26 @@ th {
   display: flex;
   gap: 15px;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .form-row input, 
 .form-row select {
   padding: 8px;
   flex: 1;
+  width: auto;
+  margin-bottom: 0;
 }
 
-.btn-add {
-  padding: 8px;
+.form-row .btn-add {
+  padding: 8px 15px;
+  width: auto;
+  white-space: nowrap;
 }
 
 #valor-nota {
   max-width: 100px;
+  flex: 0 0 100px;
 }
 
 /* agenda */
