@@ -3,7 +3,8 @@
 <head>
   <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
-  <title>Página de Cadastro</title>
+  <title>Login</title>
+  <script src="login.js"></script>
 </head>
 
 <body>
@@ -14,32 +15,27 @@
       <div class="container-cadastro">
         <h2>Planner Acadêmico UNIRIO</h2>
         <p><strong>Entrar</strong></p>
-        
+
         <form>
-          <div class="field">
-          E-mail:  
-          </div>
-          
-          <input type="email" placeholder="Digite seu e-mail" required>
-          
-          <div class="field">
-          Senha:  
-          </div>
-          
-          <input type="password" placeholder="Digite sua senha" required>
+          <div class="field">E-mail:</div>
+          <input id="campo-email" type="email" placeholder="Digite seu e-mail" required>
+          <div class="erro" id="erro-email"></div>
+
+          <div class="field">Senha:</div>
+          <input id="campo-senha" type="password" placeholder="Digite sua senha" required>
+          <div class="erro" id="erro-senha"></div>
 
           <div class="buttons">
             <button type="reset" class="reset">Limpar</button>
-            <button type="submit" class="submit">Enviar</button>
+            <button type="submit" class="submit">Entrar</button>
           </div>
         </form>
-        
-        <div class= bottomtext>
-          Esqueceu sua senha? <a href="http://www.google.com">Recuperar senha</a>
-          <br>
-          Não possui conta? <a href="http://www.google.com">Criar senha</a>
+
+        <div class="bottomtext">
+          Esqueceu sua senha? <a href="recuperar.html">Recuperar senha</a><br>
+          Não possui conta? <a href="cadastro.html">Criar conta</a>
         </div>
-        
+
       </div>
     </main>
 
@@ -48,7 +44,5 @@
     </footer>
 
   </div>
-
 </body>
-
 </html>
