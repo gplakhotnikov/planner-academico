@@ -19,6 +19,27 @@
       <li><a href="agenda.html">Agenda</a></li>
       <li><a href="notas.html">Notas</a></li>
       <li><a href="desempenho.html">Desempenho</a></li>
+      <li class="menu-config">
+        <button class="btn-config" id="btn-config" aria-label="Configurações">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
+                     a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09
+                     A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83
+                     l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
+                     A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83
+                     l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
+                     a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83
+                     l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
+                     a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="dropdown-config" id="dropdown-config">
+        <button class="btn-logout" id="btn-logout">Sair da conta</button>
+        </div>
+      </li>
     </ul>
   </nav>
 
@@ -35,29 +56,6 @@
       <div class="linha"><span>GPN</span><div class="barra"><div class="aluno" style="width:88%">8.8</div></div></div>
     </section>
 
-    <section>
-      <h2>Comparação de média com a Turma</h2>
-
-      <div class="linha"><span>AL</span><div class="barra">
-        <div class="turma" style="width:70%">7.0</div>
-        <div class="aluno" style="width:80%">8.0</div>
-      </div></div>
-
-      <div class="linha"><span>PI1</span><div class="barra">
-        <div class="turma" style="width:75%">7.5</div>
-        <div class="aluno" style="width:100%">10</div>
-      </div></div>
-
-      <div class="linha"><span>TP</span><div class="barra">
-        <div class="turma" style="width:85%">8.5</div>
-        <div class="aluno" style="width:72%">7.2</div>
-      </div></div>
-
-      <div class="linha"><span>GPN</span><div class="barra">
-        <div class="turma" style="width:72%">7.2</div>
-        <div class="aluno" style="width:88%">8.8</div>
-      </div></div>
-    </section>
 
 <section>
       <h2>Distribuição de Presenças e Faltas</h2>
@@ -77,7 +75,7 @@
 <section>
       <h2>Proximidade do Limite de Faltas</h2>
       <p class="aviso-limite">
-        O limite é de 25% de faltas (8 para matérias de 2 aulas/semana, 4 para PI1).
+        O limite é de 25% de faltas.
       </p>
       
       <div class="limite-container">
@@ -119,5 +117,6 @@
       <footer>
       <p>&copy; 2026 Coelho, Plakhotnikov, Trindade. Todos os direitos reservados.</p>
     </footer>
+  <script src="desempenho.js"></script>
 </body>
 </html>
