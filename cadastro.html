@@ -3,38 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="style.css">
+  <script src="cadastro.js"></script>
   <title>Cadastro</title>
 </head>
 
 <body>
-
   <div class="page">
 
     <main>
       <div class="container-cadastro">
         <h2>Planner Acadêmico UNIRIO</h2>
         <p><strong>Primeiro Acesso</strong></p>
-        
+
         <form>
           <div class="field">E-mail:</div>
-          <input type="email" placeholder="Digite seu e-mail" required>
+          <input id="campo-email" type="email" placeholder="Digite seu e-mail" required>
+          <div class="erro" id="erro-email"></div>
 
           <div class="field">Senha:</div>
-          <input type="password" placeholder="Digite sua senha" required>
+          <input id="campo-senha" type="password" placeholder="Digite sua senha" required>
+          <div class="erro" id="erro-senha"></div>
 
           <div class="field">Confirmar senha:</div>
-          <input type="password" placeholder="Digite sua senha novamente" required>
+          <input id="campo-confirmar" type="password" placeholder="Digite sua senha novamente" required>
+          <div class="erro" id="erro-confirmar"></div>
 
           <div class="buttons">
             <button type="reset" class="reset">Limpar</button>
             <button type="submit" class="submit">Cadastrar</button>
           </div>
         </form>
-        
+
         <div class="bottomtext">
-          Já possui conta? <a href="#">Entrar</a>
+          Já possui conta? <a href="login.html">Entrar</a>
         </div>
-        
+
       </div>
     </main>
 
@@ -43,6 +46,5 @@
     </footer>
 
   </div>
-
 </body>
 </html>
