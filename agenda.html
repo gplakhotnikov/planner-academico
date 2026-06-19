@@ -18,16 +18,37 @@
       <li><a href="agenda.html">Agenda</a></li>
       <li><a href="notas.html">Notas</a></li>
       <li><a href="desempenho.html">Desempenho</a></li>
+      <li class="menu-config">
+        <button class="btn-config" id="btn-config" aria-label="Configurações">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
+                     a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09
+                     A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83
+                     l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
+                     A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83
+                     l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
+                     a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83
+                     l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
+                     a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="dropdown-config" id="dropdown-config">
+        <button class="btn-logout" id="btn-logout">Sair da conta</button>
+        </div>
+      </li>
     </ul>
   </nav>
 
   <div class ="agenda">
     <div class="tabela">
       <div class="data">
-        <button>&lt;</button>
-        <button>&gt;</button>
-        <span id = "mes">Abril</span>
-        <span id = "ano">2026</span>
+        <button class="anterior">&lt;</button>
+        <button class="proximo">&gt;</button>
+        <span id = "mes"></span>
+        <span id = "ano"></span>
       </div>
         
       <div class="semana"> 
@@ -41,139 +62,35 @@
       </div>
       
       <div class="dias">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span>1</span>
-        <span>2</span>
-        <span>
-          3
-          <div class = "feriados">Paixão de Cristo</div>  
-        </span>
-        <span>4</span>
-        <span>5
-          <div class = "feriados">Domingo de Páscoa</div>  
-        </span>
-        <span>6</span>
-        <span>7</span>
-        <span>8</span>
-        <span>9
-          <div class = "trabalhos">Trabalho de TP</div>
-        </span>
-        <span>
-          10
-          <div class = "trabalhos">Trabalho de PI1</div>
-        </span>
-        <span>11</span>
-        <span>12</span>
-        <span>13</span>
-        <span>14</span>
-        <span>15</span>
-        <span>16</span>
-        <span>17
-          <div class = "trabalhos">Prova de PI1</div>
-        </span>
-        <span>18</span>
-        <span>19</span>
-        <span>20</span>
-        <span>21
-          <div class = "feriados">Tiradentes</div>  
-        </span>
-        <span>22
-          <div class = "trabalhos">Prova de GPN</div>
-        </span>
-        <span>23</span>
-        <span>24</span>
-        <span>25</span>
-        <span>26</span>
-        <span>27
-          <div class = "trabalhos">Prova de AL</div>
-        </span>
-        <span>28</span>
-        <span>29</span>
-        <span>30</span>
-        <span></span>
-        <span></span>
       </div>
     </div>
     
-    <div class = "funcionalidades">
-      <div class="minicalendario">
-        <div class = "data-atual">
-          <button id = "anterior">&lt;</button>
-          <span>Abril de 2026</span>
-          <button id = "proximo">&gt;</button>
-        </div>
-        
-        <div class="semana-minicalendario"> 
-        <div>D</div>
-        <div>S</div>
-        <div>T</div>
-        <div>Q</div>
-        <div>Q</div>
-        <div>S</div>
-        <div>S</div>
+    <div class="funcionalidades">
+    <div class="AdicionarEvento">
+      <h3 id="eventoTitulo">Novo Evento</h3>
+ 
+      <label>Título</label>
+      <input type="text" id="inputTitulo" placeholder="Ex: Trabalho de PI">
+ 
+      <label>Data</label>
+      <input type="date" id="inputData">
+ 
+      <label>Hora</label>
+      <input type="time" id="inputHora">
+ 
+      <input type="hidden" id="inputTipo" value="evento">
+ 
+      <div class="modal-botoes">
+        <button id="btnCancelar" class="cancelar">Cancelar</button>
+        <button id="btnSalvar" class="salvar">Salvar</button>
       </div>
-
-        <div class="dias-minicalendario">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-        <span>6</span>
-        <span>7</span>
-        <span>8</span>
-        <span>9</span>
-        <span class ="hoje">10</span>
-        <span>11</span>
-        <span>12</span>
-        <span>13</span>
-        <span>14</span>
-        <span>15</span>
-        <span>16</span>
-        <span>17</span>
-        <span>18</span>
-        <span>19</span>
-        <span>20</span>
-        <span>21</span>
-        <span>22</span>
-        <span>23</span>
-        <span>24</span>
-        <span>25</span>
-        <span>26</span>
-        <span>27</span>
-        <span>28</span>
-        <span>29</span>
-        <span>30</span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-    <div class = "criar">
-      <ul>
-        <li class ="adicionar">
-          <button class = "topo">Adicionar&#9660</button>
-          <div class = "lista">
-            <button>+ Evento</button>
-            <button>+ Tarefa</button>
-          </div>
-        </li>
-      <ul>
-    </div>
-    <div class = "exibicao">
-      <span class ="feriado"><input type = "checkbox" checked>Feriados</span>
-      <span class ="tarefa"><input type = "checkbox" checked >PI1</span>
-      <span class ="tarefa"><input type = "checkbox" checked>GPN</span>
-      <span class ="tarefa"><input type = "checkbox" checked>AL</span>
     </div>
   </div>
-</div>
+  </div>  
 
-  <footer>
+<script src="agenda.js"></script>
+    
+<footer>
     <p>&copy; 2026 Coelho, Plakhotnikov, Trindade. Todos os direitos reservados.</p>
     </footer>
 </body>

@@ -364,16 +364,14 @@ th {
 .agenda{
   display: flex;
   justify-content: center;
-  margin: 20px;
-  padding: 20px;
-  width: 1200px;
+  width: 100%;
   height: auto;
   border-radius: 1%;
   background-color: rgb(255, 255, 255);
 }
 /* calendario */
 .tabela{
-  width: 80%;
+  width: 70%;
   border: 1px solid #43444431;
   border-radius: 2%;
   overflow: hidden;
@@ -428,177 +426,75 @@ th {
   grid-template-columns: repeat(7, 1fr);
   width: 100%;
 }
-.dias span{
-  width: auto;
-  display: flex;
-  height: 70px;
-  background-color: rgb(255, 255, 255);
-  border-right: #838383 1px solid;
-  border-bottom: #838383 1px solid;
-}
-.dias span:nth-child(7n){
-  border-right: none;
-}
-.dias span::nth-child(-n+7){
-  border-bottom: none;
-}
-
-.feriados{
-  display: block;
-  align-self: center;
-  text-align: center;
-  border-radius: 10px;
-  width: 110px;
-  font-size: 0.8em;
-  background-color: rgb(185, 255, 232);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-}
-
-.trabalhos{
-  display: block;
-  align-self: center;
-  text-align: center;
-  border-radius: 10px;
-  width: 110px;
-  font-size: 0.8em;
-  background-color: rgb(250, 222, 203);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-}
-
-/* funcoes ao lado do calendario */
-.funcionalidades{
-  background-color: rgb(255, 255, 255);
-  width: 20%;
-  overflow-y: auto;
-}
-.funcionalidades::-webkit-scrollbar-track{
-  background-color: #838383;  
-  border-radius: 10px;
-  width: 8px;
-  background: transparent;
-}
-.minicalendario{
-  margin: 10px;
+.dia-quadrado {
+  width: 100%;
+  min-height: 70px;
+  height: auto;
   display: flex;
   flex-direction: column;
-  max-width: 100%;
+  background-color: #fff;
+  border-left: #838383 1px solid;
+  border-bottom: #838383 1px solid;
+  border-right: #838383 1px solid;
 }
 
-.data-atual{
+.vazio {
+  border-bottom: #838383 1px solid;
+  border-left: #838383 1px solid;
+}
+
+
+.numero-dia {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.evento {
+  background-color: #1a73e8;
   display: flex;
-  align-items: center;       
-  font-weight: 400;
-  width: 100%;
-  justify-content: space-between;
+  justify-self : center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 20px;
+  color: #fff;
+  font-size: 11px;
+  margin-bottom: 2px;
+  border-radius: 3px;
 }
 
-.data-atual button{
-  border: none;
-  border-radius: 50%;
-  background-color: rgb(255, 255, 255);
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+.dia-quadrado.hoje .numero-dia {
+  color: #1a73e8;
+  font-weight: bold;
 }
-/* minicalendario */
-.semana-minicalendario{
+
+.funcionalidades{
+  width: 20%;
+  margin: 20px;
   display: flex;
-  width: 100%;
+  justify-content: center;
+  border: 1px solid #43444431;
+  border-radius: 2%;
 }
 
-.semana-minicalendario div{
-  width: 100%;
-  margin-top: 5px;
+.AdicionarEvento h3 {
   text-align: center;
+  font-size: 1.5em;
 }
 
-.dias-minicalendario{
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  width: 100%;
+.AdicionarEvento {
+  padding: 20px;
 }
 
-.dias-minicalendario span{
-  display: flex;
-  padding: 2px;
-  justify-content: center;
-  margin-top: 2px;
-  font-weight: 400;
-  cursor: pointer;
-  border-radius: 50%;
+.AdicionarEvento input{
+  width: 80%;
 }
-.dias-minicalendario span:hover{
-  background: #85b8ee;
-}
-.hoje{
-  background: #007bff;
-}
-
-.criar{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.criar ul{
-  list-style: none;
-  padding: 0;
-}
-
-.adicionar{
-  cursor: pointer;
-}
-
-.adicionar button{
-  display: flex;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  width: 150px;
-  height: 25px;
-  border: none;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-}
-.lista{
-  position: absolute;
-  display: none;
-}
-.adicionar:hover .lista{
+.AdicionarEvento label {
   display: block;
-}
-
-.exibicao{
-  display: block;
-  margin-left: 20px;
-}
-.exibicao span input[type="checkbox"] {
-    margin: 0;              
-    cursor: pointer;          
-    width: 16px;              
-    height: 16px;             
-}
-
-.exibicao span {
-  display: flex;
-  align-items: center;
-  justify-self: start;
-  margin-top: 5px;
-  border-radius: 10px;
-  width: 100px;
-  padding: 5px;
-  gap: 5px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-}
-
-.feriado {
-  background: rgb(185, 255, 232);
-}
-
-.tarefa{
-  background: rgb(250, 222, 203);
+  font-size: 1.0em;
+  color: #333;
 }
 
 footer {
