@@ -68,24 +68,26 @@
     <div class="funcionalidades">
     <div class="AdicionarEvento">
       <h3 id="eventoTitulo">Novo Evento</h3>
- 
+    
       <label>Título</label>
       <input type="text" id="inputTitulo" placeholder="Ex: Trabalho de PI">
- 
+    
       <label>Data</label>
       <input type="date" id="inputData">
- 
+    
       <label>Hora</label>
       <input type="time" id="inputHora">
- 
+    
       <input type="hidden" id="inputTipo" value="evento">
- 
+    
       <div class="modal-botoes">
+        <button id="btnExcluir" class="excluir" style="display:none;">Excluir</button>
         <button id="btnCancelar" class="cancelar">Cancelar</button>
         <button id="btnSalvar" class="salvar">Salvar</button>
       </div>
     </div>
   </div>
+  
   </div>  
 
 <script src="agenda.js"></script>
