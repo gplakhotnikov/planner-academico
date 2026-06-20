@@ -46,7 +46,6 @@
     <h1>Agenda</h1>
 
     <section class="agenda-layout">
-      <!-- Calendário -->
       <div class="calendario-wrapper">
         <div class="calendario-header">
           <button class="btn-nav anterior">&lt;</button>
@@ -67,7 +66,6 @@
         <div class="dias"></div>
       </div>
 
-      <!-- Painel lateral -->
       <div class="painel-evento">
         <h3 id="eventoTitulo">Novo Evento</h3>
 
@@ -80,7 +78,8 @@
         <label for="inputHora">Hora</label>
         <input type="time" id="inputHora">
 
-        <input type="hidden" id="inputTipo" value="evento">
+        <label for="inputCategoria">Categoria</label>
+        <select id="inputCategoria"></select>
 
         <div class="painel-botoes">
           <button id="btnExcluir" class="btn-excluir" style="display:none;">Excluir</button>
@@ -93,6 +92,14 @@
           <div id="lista-eventos-hoje"></div>
         </div>
       </div>
+    </section>
+
+    <section class="lista-eventos-section">
+      <div class="lista-eventos-header">
+        <h3>Eventos Registrados</h3>
+        <select id="filtroCategoria"></select>
+      </div>
+      <div id="lista-todos-eventos" class="lista-todos-eventos"></div>
     </section>
   </div>
 

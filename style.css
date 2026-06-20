@@ -311,6 +311,18 @@ button {
   gap: 2px;
 }
 
+.dia-quadrado.feriado {
+  background-color: #fffbf0;
+}
+ 
+.dia-quadrado.feriado:hover {
+  background: #fff3d0;
+}
+ 
+.feriado-pill {
+  font-size: 10px !important;
+}
+
 .evento-pill {
   font-size: 11px;
   color: white;
@@ -375,6 +387,21 @@ button {
 }
 
 .painel-evento input:focus {
+  border-color: #007bff;
+}
+
+.painel-evento select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+}
+
+.painel-evento select:focus {
   border-color: #007bff;
 }
 
@@ -497,6 +524,60 @@ button {
 
 .btn-editar-mini:hover {
   background: #e8f0fe;
+}
+
+.lista-eventos-section {
+  margin-top: 20px;
+}
+
+.lista-eventos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.lista-eventos-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.lista-eventos-header select {
+  font-size: 13px;
+}
+
+.lista-todos-eventos {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.evento-item-lista {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.evento-item-lista:hover {
+  background: #f0f6ff;
+  border-color: #007bff;
+}
+
+.dia-destaque {
+  box-shadow: 0 0 0 3px #007bff inset;
+  background: #eaf2ff;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+
+.evento-pill-destaque {
+  box-shadow: 0 0 0 2px white inset;
 }
 
 table {

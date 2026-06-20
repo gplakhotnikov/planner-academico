@@ -1,5 +1,5 @@
 function carregarUsuarios() {
-  var salvo = localStorage.getItem("plannerUnirio_usuarios");
+  const salvo = localStorage.getItem("plannerUnirio_usuarios");
   if (salvo) {
     return JSON.parse(salvo);
   } else {
@@ -12,8 +12,8 @@ function mostrarErro(id, msg) {
 }
 
 function limparErros() {
-  var ids = ["erro-email", "erro-senha"];
-  for (var i = 0; i < ids.length; i++) {
+  const ids = ["erro-email", "erro-senha"];
+  for (let i = 0; i < ids.length; i++) {
     document.getElementById(ids[i]).textContent = "";
   }
 }
@@ -22,13 +22,13 @@ document.querySelector("form").addEventListener("submit", function (e) {
   e.preventDefault();
   limparErros();
 
-  var email = document.getElementById("campo-email").value.trim();
-  var senha = document.getElementById("campo-senha").value;
+  const email = document.getElementById("campo-email").value.trim();
+  const senha = document.getElementById("campo-senha").value;
 
-  var usuarios = carregarUsuarios();
+  const usuarios = carregarUsuarios();
   
-  var usuario = null;
-  for (var i = 0; i < usuarios.length; i++) {
+  let usuario = null;
+  for (let i = 0; i < usuarios.length; i++) {
     if (usuarios[i].email === email) {
       usuario = usuarios[i];
       break;

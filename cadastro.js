@@ -1,5 +1,5 @@
 function carregarUsuarios() {
-  var salvo = localStorage.getItem("plannerUnirio_usuarios");
+  const salvo = localStorage.getItem("plannerUnirio_usuarios");
   if (salvo) {
     return JSON.parse(salvo);
   } else {
@@ -16,8 +16,8 @@ function mostrarErro(id, msg) {
 }
 
 function limparErros() {
-  var ids = ["erro-email", "erro-senha", "erro-confirmar"];
-  for (var i = 0; i < ids.length; i++) {
+  const ids = ["erro-email", "erro-senha", "erro-confirmar"];
+  for (let i = 0; i < ids.length; i++) {
     document.getElementById(ids[i]).textContent = "";
   }
 }
@@ -26,11 +26,18 @@ document.querySelector("form").addEventListener("submit", function (e) {
   e.preventDefault();
   limparErros();
 
-  var email = document.getElementById("campo-email").value.trim();
-  var senha = document.getElementById("campo-senha").value;
-  var confirmar = document.getElementById("campo-confirmar").value;
+  const email = document.getElementById("campo-email").value.trim();
+  const senha = document.getElementById("campo-senha").value;
+  const confirmar = document.getElementById("campo-confirmar").value;
 
-  var valido = true;
+  const DOMINIO_PERMITIDO = "@edu.unirio.br";
+
+  let valido = true;
+
+  if (!email.toLowerCase().endsWith(DOMINIO_PERMITIDO)) {
+    mostrarErro("erro-email", "O e-mail deve ser institucional (" + DOMINIO_PERMITIDO + ").");
+    valido = false;
+  }
 
   if (senha.length < 6) {
     mostrarErro("erro-senha", "A senha deve ter pelo menos 6 caracteres.");
@@ -44,10 +51,10 @@ document.querySelector("form").addEventListener("submit", function (e) {
 
   if (!valido) return;
 
-  var usuarios = carregarUsuarios();
+  const usuarios = carregarUsuarios();
 
-  var emailJaExiste = false;
-  for (var i = 0; i < usuarios.length; i++) {
+  let emailJaExiste = false;
+  for (let i = 0; i < usuarios.length; i++) {
     if (usuarios[i].email === email) {
       emailJaExiste = true;
       break;
