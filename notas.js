@@ -1,7 +1,7 @@
-const dadosSalvos = localStorage.getItem("plannerUnirio_notas");
-const faltasSalvas = localStorage.getItem("plannerUnirio_faltas");
-let disciplinas = [];
-let faltas = {};
+var dadosSalvos = localStorage.getItem("plannerUnirio_notas");
+var faltasSalvas = localStorage.getItem("plannerUnirio_faltas");
+var disciplinas = [];
+var faltas = {};
 
 if (faltasSalvas) {
   faltas = JSON.parse(faltasSalvas);
@@ -18,41 +18,39 @@ if (dadosSalvos) {
   ];
 }
 
-const btnConfig = document.getElementById("btn-config");
-const dropdownConfig = document.getElementById("dropdown-config");
-const btnLogout = document.getElementById("btn-logout");
+var btnConfig = document.getElementById("btn-config");
+var dropdownConfig = document.getElementById("dropdown-config");
+var btnLogout = document.getElementById("btn-logout");
 
-btnConfig.addEventListener("click", (e) => {
+btnConfig.addEventListener("click", function(e) {
   e.stopPropagation();
   dropdownConfig.classList.toggle("aberto");
 });
 
-document.addEventListener("click", () => {
+document.addEventListener("click", function() {
   dropdownConfig.classList.remove("aberto");
 });
 
-btnLogout.addEventListener("click", () => {
+btnLogout.addEventListener("click", function() {
   sessionStorage.removeItem("plannerUnirio_usuarioLogado");
   window.location.href = "login.html";
 });
 
+var tbody = document.querySelector("table tbody");
+var selectDisciplina = document.getElementById("select-disciplina");
+var inputNovaDisciplina = document.getElementById("nova-disciplina");
+var btnAddDisciplina = document.getElementById("ad18");
+var btnAddNota = document.querySelectorAll(".btn-add")[1];
+var selectTipo = document.getElementById("select-tipo");
+var inputNota = document.getElementById("valor-nota");
 
-const tbody = document.querySelector("table tbody");
-const selectDisciplina = document.getElementById("select-disciplina");
-const inputNovaDisciplina = document.getElementById("nova-disciplina");
-const btnAddDisciplina = document.getElementById("ad18");
-const btnAddNota = document.querySelectorAll(".btn-add")[1];
-const selectTipo = document.getElementById("select-tipo");
-const inputNota = document.getElementById("valor-nota");
+var selectRemoverDisciplina = document.getElementById("select-remover-disciplina");
+var btnRemoverDisciplina = document.getElementById("btn-remover-disciplina");
 
-// Remover disciplina
-const selectRemoverDisciplina = document.getElementById("select-remover-disciplina");
-const btnRemoverDisciplina = document.getElementById("btn-remover-disciplina");
-
-const selectDisciplinaFalta = document.getElementById("select-disciplina-falta");
-const inputLimiteFalta = document.getElementById("limite-falta");
-const btnDefinirLimite = document.getElementById("btn-definir-limite");
-const faltasLista = document.getElementById("faltas-lista");
+var selectDisciplinaFalta = document.getElementById("select-disciplina-falta");
+var inputLimiteFalta = document.getElementById("limite-falta");
+var btnDefinirLimite = document.getElementById("btn-definir-limite");
+var faltasLista = document.getElementById("faltas-lista");
 
 function salvarDados() {
   localStorage.setItem("plannerUnirio_notas", JSON.stringify(disciplinas));
@@ -63,64 +61,73 @@ function salvarFaltas() {
 }
 
 function calcularMedia(notas) {
-  let soma = 0;
-  let qtd = 0;
-  for (let chave in notas) {
+  var soma = 0;
+  var qtd = 0;
+  for (var chave in notas) {
     if (notas[chave] !== null) {
       soma += parseFloat(notas[chave]);
       qtd++;
     }
   }
-  return qtd === 0 ? "-" : (soma / qtd).toFixed(1);
+  if (qtd === 0) {
+    return "-";
+  } else {
+    return (soma / qtd).toFixed(1);
+  }
 }
 
 function atualizarTela() {
   tbody.innerHTML = "";
   selectDisciplina.innerHTML = '<option value="">Selecione a Disciplina</option>';
-  selectRemoverDisciplina.innerHTML = '<option value="">Selecione a Disciplina para Remover</option>'; // Limpa o select de remoção
+  selectRemoverDisciplina.innerHTML = '<option value="">Selecione a Disciplina para Remover</option>';
 
-  disciplinas.forEach((disc, index) => {
-    const tr = document.createElement("tr");
+  for (var i = 0; i < disciplinas.length; i++) {
+    var disc = disciplinas[i];
+    var tr = document.createElement("tr");
 
-    const tdNome = document.createElement("td");
+    var tdNome = document.createElement("td");
     tdNome.textContent = disc.nome;
     tr.appendChild(tdNome);
 
-    const tipos = ["Prova 1", "Prova 2", "Projeto", "Prova Final"];
-    tipos.forEach(tipo => {
-      const td = document.createElement("td");
-      td.textContent = disc.notas[tipo] !== null ? disc.notas[tipo] : "-";
+    var tipos = ["Prova 1", "Prova 2", "Projeto", "Prova Final"];
+    for (var j = 0; j < tipos.length; j++) {
+      var tipo = tipos[j];
+      var td = document.createElement("td");
+      if (disc.notas[tipo] !== null) {
+        td.textContent = disc.notas[tipo];
+      } else {
+        td.textContent = "-";
+      }
       tr.appendChild(td);
-    });
+    }
 
-    const tdMedia = document.createElement("td");
+    var tdMedia = document.createElement("td");
     tdMedia.textContent = calcularMedia(disc.notas);
     tr.appendChild(tdMedia);
 
     tbody.appendChild(tr);
 
-    // Popular SELECT adicionar nota
-    const option = document.createElement("option");
-    option.value = index;
+    var option = document.createElement("option");
+    option.value = i;
     option.textContent = disc.nome;
     selectDisciplina.appendChild(option);
 
-    // Popular o SELECT remover disciplina
-    const optionRemover = document.createElement("option");
-    optionRemover.value = index;
+    var optionRemover = document.createElement("option");
+    optionRemover.value = i;
     optionRemover.textContent = disc.nome;
     selectRemoverDisciplina.appendChild(optionRemover);
-  });
+  }
 }
 
 function atualizarFaltasUI() {
   selectDisciplinaFalta.innerHTML = '<option value="">Selecione a Disciplina</option>';
-  disciplinas.forEach(disc => {
-    const opt = document.createElement("option");
-    opt.value = disc.nome;
-    opt.textContent = disc.nome;
+  
+  for (var i = 0; i < disciplinas.length; i++) {
+    var opt = document.createElement("option");
+    opt.value = disciplinas[i].nome;
+    opt.textContent = disciplinas[i].nome;
     selectDisciplinaFalta.appendChild(opt);
-  });
+  }
 
   faltasLista.innerHTML = "";
   if (disciplinas.length === 0) {
@@ -128,68 +135,113 @@ function atualizarFaltasUI() {
     return;
   }
 
-  disciplinas.forEach(disc => {
-    const nome = disc.nome;
-    if (!faltas[nome]) faltas[nome] = { count: 0, limite: null };
-    const { count, limite } = faltas[nome];
-    const emRisco = limite !== null && count >= Math.ceil(limite * 0.75);
-    const excedido = limite !== null && count >= limite;
+  for (var i = 0; i < disciplinas.length; i++) {
+    var nome = disciplinas[i].nome;
+    if (!faltas[nome]) {
+      faltas[nome] = { count: 0, limite: null };
+    }
+    
+    var count = faltas[nome].count;
+    var limite = faltas[nome].limite;
+    
+    var emRisco = limite !== null && count >= Math.ceil(limite * 0.75);
+    var excedido = limite !== null && count >= limite;
 
-    const card = document.createElement("div");
-    card.className = "falta-card" + (excedido ? " falta-excedida" : emRisco ? " falta-risco" : "");
+    var classeCard = "falta-card";
+    if (excedido) { 
+      classeCard += " falta-excedida"; 
+    } else if (emRisco) { 
+      classeCard += " falta-risco"; 
+    }
 
-    const pct = limite ? Math.min(count / limite, 1) : 0;
-    const barColor = excedido ? "#e53935" : emRisco ? "#ff8c1a" : "#007bff";
+    var pct = 0;
+    if (limite) { pct = Math.min(count / limite, 1); }
+    
+    var barColor = "#007bff";
+    if (excedido) { 
+      barColor = "#e53935"; 
+    } else if (emRisco) { 
+      barColor = "#ff8c1a"; 
+    }
 
-    const limiteTexto = limite !== null
-      ? `${count} de ${limite} faltas permitidas`
-      : `${count} falta${count !== 1 ? "s" : ""} registrada${count !== 1 ? "s" : ""} <span style="color:#aaa">(limite não definido)</span>`;
+    var classeBadge = "badge-ok";
+    var textoBadge = "✓ OK";
+    if (excedido) {
+      classeBadge = "badge-danger";
+      textoBadge = "⚠ Limite excedido";
+    } else if (emRisco) {
+      classeBadge = "badge-warn";
+      textoBadge = "⚠ Atenção";
+    }
 
-    card.innerHTML = `
-      <div class="falta-card-header">
-        <span class="falta-nome">${nome}</span>
-        <span class="falta-badge ${excedido ? "badge-danger" : emRisco ? "badge-warn" : "badge-ok"}">
-          ${excedido ? "⚠ Limite excedido" : emRisco ? "⚠ Atenção" : "✓ OK"}
-        </span>
-      </div>
-      ${limite !== null ? `
-      <div class="falta-progress-wrap">
-        <div class="falta-progress-bar" style="width:${pct * 100}%; background:${barColor};"></div>
-      </div>` : ""}
-      <div class="falta-card-footer">
-        <span class="falta-count">${limiteTexto}</span>
-        <div class="falta-controls">
-          <button class="btn-falta btn-minus" data-nome="${nome}" title="Remover uma falta">−</button>
-          <button class="btn-falta btn-plus" data-nome="${nome}" title="Registrar uma falta">+</button>
-        </div>
-      </div>
-    `;
+    var limiteTexto = "";
+    if (limite !== null) {
+      limiteTexto = count + " de " + limite + " faltas permitidas";
+    } else {
+      var sCount = count !== 1 ? "s" : "";
+      var sReg = count !== 1 ? "s" : "";
+      limiteTexto = count + " falta" + sCount + " registrada" + sReg + " <span style=\"color:#aaa\">(limite não definido)</span>";
+    }
+
+    var progressoHTML = "";
+    if (limite !== null) {
+      progressoHTML = '<div class="falta-progress-wrap">' +
+                        '<div class="falta-progress-bar" style="width:' + (pct * 100) + '%; background:' + barColor + ';"></div>' +
+                      '</div>';
+    }
+
+    var card = document.createElement("div");
+    card.className = classeCard;
+    card.innerHTML = '<div class="falta-card-header">' +
+                        '<span class="falta-nome">' + nome + '</span>' +
+                        '<span class="falta-badge ' + classeBadge + '">' + textoBadge + '</span>' +
+                      '</div>' +
+                      progressoHTML +
+                      '<div class="falta-card-footer">' +
+                        '<span class="falta-count">' + limiteTexto + '</span>' +
+                        '<div class="falta-controls">' +
+                          '<button class="btn-falta btn-minus" data-nome="' + nome + '" title="Remover uma falta">−</button>' +
+                          '<button class="btn-falta btn-plus" data-nome="' + nome + '" title="Registrar uma falta">+</button>' +
+                        '</div>' +
+                      '</div>';
+                      
     faltasLista.appendChild(card);
-  });
+  }
 
-  faltasLista.querySelectorAll(".btn-plus").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const nome = btn.dataset.nome;
-      faltas[nome].count++;
-      salvarFaltas();
-      atualizarFaltasUI();
-    });
-  });
-  faltasLista.querySelectorAll(".btn-minus").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const nome = btn.dataset.nome;
-      if (faltas[nome].count > 0) faltas[nome].count--;
-      salvarFaltas();
-      atualizarFaltasUI();
-    });
-  });
+  var botoesPlus = faltasLista.querySelectorAll(".btn-plus");
+  for (var i = 0; i < botoesPlus.length; i++) {
+    (function(btn) {
+      btn.addEventListener("click", function() {
+        var nomeMateria = btn.dataset.nome;
+        faltas[nomeMateria].count++;
+        salvarFaltas();
+        atualizarFaltasUI();
+      });
+    })(botoesPlus[i]);
+  }
+
+  var botoesMinus = faltasLista.querySelectorAll(".btn-minus");
+  for (var i = 0; i < botoesMinus.length; i++) {
+    (function(btn) {
+      btn.addEventListener("click", function() {
+        var nomeMateria = btn.dataset.nome;
+        if (faltas[nomeMateria].count > 0) {
+          faltas[nomeMateria].count--;
+        }
+        salvarFaltas();
+        atualizarFaltasUI();
+      });
+    })(botoesMinus[i]);
+  }
 }
 
-btnDefinirLimite.addEventListener("click", () => {
-  const nome = selectDisciplinaFalta.value;
-  const limite = parseInt(inputLimiteFalta.value);
+btnDefinirLimite.addEventListener("click", function() {
+  var nome = selectDisciplinaFalta.value;
+  var limite = parseInt(inputLimiteFalta.value);
   if (nome && !isNaN(limite) && limite > 0) {
-    if (!faltas[nome]) faltas[nome] = { count: 0, limite: null };
+    if (!faltas[nome]) {
+      faltas[nome] = { count: 0, limite: null };
+    }
     faltas[nome].limite = limite;
     inputLimiteFalta.value = "";
     selectDisciplinaFalta.value = "";
@@ -198,8 +250,8 @@ btnDefinirLimite.addEventListener("click", () => {
   }
 });
 
-btnAddDisciplina.addEventListener("click", () => {
-  const nome = inputNovaDisciplina.value.trim();
+btnAddDisciplina.addEventListener("click", function() {
+  var nome = inputNovaDisciplina.value.trim();
   if (nome !== "") {
     disciplinas.push({
       nome: nome,
@@ -212,10 +264,10 @@ btnAddDisciplina.addEventListener("click", () => {
   }
 });
 
-btnAddNota.addEventListener("click", () => {
-  const indexDisc = selectDisciplina.value;
-  const tipo = selectTipo.value;
-  const valor = inputNota.value;
+btnAddNota.addEventListener("click", function() {
+  var indexDisc = selectDisciplina.value;
+  var tipo = selectTipo.value;
+  var valor = inputNota.value;
 
   if (indexDisc !== "" && tipo !== "" && valor !== "") {
     disciplinas[indexDisc].notas[tipo] = parseFloat(valor);
@@ -228,22 +280,17 @@ btnAddNota.addEventListener("click", () => {
   }
 });
 
-// Remover disciplina
-btnRemoverDisciplina.addEventListener("click", () => {
-  const indexDisc = selectRemoverDisciplina.value;
+btnRemoverDisciplina.addEventListener("click", function() {
+  var indexDisc = selectRemoverDisciplina.value;
   
   if (indexDisc !== "") {
-    const nomeDisc = disciplinas[indexDisc].nome;
-    
-    // Remove do array de disciplinas
+    var nomeDisc = disciplinas[indexDisc].nome;
     disciplinas.splice(indexDisc, 1);
     
-    // Limpar faltas
     if (faltas[nomeDisc]) {
       delete faltas[nomeDisc];
     }
     
-    // Atualizar localStorage e tela
     salvarDados();
     salvarFaltas();
     atualizarTela();
@@ -251,7 +298,7 @@ btnRemoverDisciplina.addEventListener("click", () => {
   }
 });
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", function() {
   atualizarTela();
   atualizarFaltasUI();
 });

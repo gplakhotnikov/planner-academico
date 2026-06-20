@@ -1,6 +1,10 @@
 function carregarUsuarios() {
-  const salvo = localStorage.getItem("plannerUnirio_usuarios");
-  return salvo ? JSON.parse(salvo) : [];
+  var salvo = localStorage.getItem("plannerUnirio_usuarios");
+  if (salvo) {
+    return JSON.parse(salvo);
+  } else {
+    return [];
+  }
 }
 
 function salvarUsuarios(usuarios) {
@@ -12,20 +16,21 @@ function mostrarErro(id, msg) {
 }
 
 function limparErros() {
-  ["erro-email", "erro-senha", "erro-confirmar"].forEach(id => {
-    document.getElementById(id).textContent = "";
-  });
+  var ids = ["erro-email", "erro-senha", "erro-confirmar"];
+  for (var i = 0; i < ids.length; i++) {
+    document.getElementById(ids[i]).textContent = "";
+  }
 }
 
 document.querySelector("form").addEventListener("submit", function (e) {
   e.preventDefault();
   limparErros();
 
-  const email = document.getElementById("campo-email").value.trim();
-  const senha = document.getElementById("campo-senha").value;
-  const confirmar = document.getElementById("campo-confirmar").value;
+  var email = document.getElementById("campo-email").value.trim();
+  var senha = document.getElementById("campo-senha").value;
+  var confirmar = document.getElementById("campo-confirmar").value;
 
-  let valido = true;
+  var valido = true;
 
   if (senha.length < 6) {
     mostrarErro("erro-senha", "A senha deve ter pelo menos 6 caracteres.");
@@ -39,20 +44,28 @@ document.querySelector("form").addEventListener("submit", function (e) {
 
   if (!valido) return;
 
-  const usuarios = carregarUsuarios();
+  var usuarios = carregarUsuarios();
 
-  if (usuarios.find(u => u.email === email)) {
+  var emailJaExiste = false;
+  for (var i = 0; i < usuarios.length; i++) {
+    if (usuarios[i].email === email) {
+      emailJaExiste = true;
+      break;
+    }
+  }
+
+  if (emailJaExiste) {
     mostrarErro("erro-email", "Este e-mail já está cadastrado.");
     return;
   }
 
-  usuarios.push({ email, senha });
+  usuarios.push({ email: email, senha: senha });
   salvarUsuarios(usuarios);
 
   alert("Cadastro realizado com sucesso!");
   window.location.href = "login.html";
 });
 
-document.querySelector(".reset").addEventListener("click", () => {
+document.querySelector(".reset").addEventListener("click", function() {
   limparErros();
 });

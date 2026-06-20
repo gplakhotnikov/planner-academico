@@ -1,25 +1,23 @@
-const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-const CHAVE_STORAGE = 'agenda_eventos';
- 
-class Evento {
-  constructor(nome, data, hora) {
-    this.id = Date.now() + Math.random();
-    this.nome = nome;
-    this.data = data;
-    this.hora = hora;
-  }
+var meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+             'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+var CHAVE_STORAGE = 'agenda_eventos';
+
+function Evento(nome, data, hora) {
+  this.id = Date.now() + Math.random();
+  this.nome = nome;
+  this.data = data;
+  this.hora = hora;
 }
- 
 
 function salvarNoLocalStorage() {
   localStorage.setItem(CHAVE_STORAGE, JSON.stringify(eventos));
 }
- 
 
 function carregarDoLocalStorage() {
-  const dados = localStorage.getItem(CHAVE_STORAGE);
-  if (!dados) return [];
- 
+  var dados = localStorage.getItem(CHAVE_STORAGE);
+  if (!dados) {
+    return [];
+  }
   try {
     return JSON.parse(dados);
   } catch (erro) {
@@ -27,73 +25,201 @@ function carregarDoLocalStorage() {
     return [];
   }
 }
- 
-const cores = ['#3a1515', '#3f3120', '#3d3f10', '#38b8c9', '#353f99', '#2e5c45', '#4e1e4e'];
-const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-const botaoProximo = document.querySelector('.proximo');
-const botaoAnterior = document.querySelector('.anterior');
-const el = document.querySelector('.dias');
-const inputTitulo = document.getElementById('inputTitulo');
-const inputData = document.getElementById('inputData');
-const inputHora = document.getElementById('inputHora');
-const inputTipo = document.getElementById('inputTipo');
-const btnSalvar = document.getElementById('btnSalvar');
-const btnCancelar = document.getElementById('btnCancelar');
-const btnExcluir = document.getElementById('btnExcluir');
-const eventoTitulo = document.getElementById('eventoTitulo');
-let eventos = [];
- 
-let eventoEmEdicaoId = null;
- 
-let dataAtual = new Date();
-let mesAtual = dataAtual.getMonth();
-let anoAtual = dataAtual.getFullYear();
- 
-function buscarEventosDoDia(dia, mes, ano) {
-  const dataFormatada = `${ano}-${String(mes + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
-  return eventos.filter(evento => evento.data === dataFormatada);
+
+var coresCategorias = ['#007bff', '#e53935', '#ff8c1a', '#2e7d32', '#6a1b9a', '#00838f'];
+var corPorId = {};
+
+function obterCorEvento(id) {
+  if (!corPorId[id]) {
+    corPorId[id] = coresCategorias[Object.keys(corPorId).length % coresCategorias.length];
+  }
+  return corPorId[id];
 }
- 
+
+var botaoProximo = document.querySelector('.proximo');
+var botaoAnterior = document.querySelector('.anterior');
+var el = document.querySelector('.dias');
+var inputTitulo = document.getElementById('inputTitulo');
+var inputData = document.getElementById('inputData');
+var inputHora = document.getElementById('inputHora');
+var inputTipo = document.getElementById('inputTipo');
+var btnSalvar = document.getElementById('btnSalvar');
+var btnCancelar = document.getElementById('btnCancelar');
+var btnExcluir = document.getElementById('btnExcluir');
+var eventoTitulo = document.getElementById('eventoTitulo');
+var eventosHoje = document.getElementById('eventos-hoje');
+var listaEventosHoje = document.getElementById('lista-eventos-hoje');
+
+var eventos = [];
+var eventoEmEdicaoId = null;
+
+var dataAtual = new Date();
+var mesAtual = dataAtual.getMonth();
+var anoAtual = dataAtual.getFullYear();
+
+var btnConfig = document.getElementById('btn-config');
+var dropdownConfig = document.getElementById('dropdown-config');
+var btnLogout = document.getElementById('btn-logout');
+
+btnConfig.addEventListener('click', function(e) {
+  e.stopPropagation();
+  dropdownConfig.classList.toggle('aberto');
+});
+
+document.addEventListener('click', function() {
+  dropdownConfig.classList.remove('aberto');
+});
+
+btnLogout.addEventListener('click', function() {
+  sessionStorage.removeItem('plannerUnirio_usuarioLogado');
+  window.location.href = 'login.html';
+});
+
+function buscarEventosDoDia(dia, mes, ano) {
+  var mesFormatado = String(mes + 1);
+  if (mesFormatado.length < 2) { mesFormatado = '0' + mesFormatado; }
+  var diaFormatado = String(dia);
+  if (diaFormatado.length < 2) { diaFormatado = '0' + diaFormatado; }
+  
+  var dataFormatada = ano + '-' + mesFormatado + '-' + diaFormatado;
+  
+  var filtrados = [];
+  for (var i = 0; i < eventos.length; i++) {
+    if (eventos[i].data === dataFormatada) {
+      filtrados.push(eventos[i]);
+    }
+  }
+  return filtrados;
+}
+
 function atualizarCalendario(mes, ano) {
-  const Mes = document.getElementById('mes');
-  const Ano = document.getElementById('ano');
- 
-  const primeiroDia = new Date(ano, mes, 1).getDay();
-  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
- 
-  Mes.textContent = meses[mes];
-  Ano.textContent = ano;
- 
+  var elMes = document.getElementById('mes');
+  var elAno = document.getElementById('ano');
+
+  var primeiroDia = new Date(ano, mes, 1).getDay();
+  var ultimoDia = new Date(ano, mes + 1, 0).getDate();
+
+  elMes.textContent = meses[mes];
+  elAno.textContent = ano;
+
   el.innerHTML = '';
- 
-  for (let i = 0; i < primeiroDia; i++) {
+
+  for (var i = 0; i < primeiroDia; i++) {
     el.innerHTML += '<span class="vazio"></span>';
   }
- 
-  for (let dia = 1; dia <= ultimoDia; dia++) {
-    const eventosDoDia = buscarEventosDoDia(dia, mes, ano);
- 
-    let eventosHTML = '';
-    eventosDoDia.forEach(evento => {
-      eventosHTML += `<div class="evento" data-id="${evento.id}" style="background-color: ${corAleatoria}">${evento.hora} - ${evento.nome}</div>`;
-    });
- 
-    el.innerHTML += `<div class="dia-quadrado"><span class="numero-dia">${dia}</span>${eventosHTML}</div>`;
+
+  var hoje = new Date();
+  var ehMesAtual = hoje.getMonth() === mes && hoje.getFullYear() === ano;
+
+  for (var dia = 1; dia <= ultimoDia; dia++) {
+    var eventosDoDia = buscarEventosDoDia(dia, mes, ano);
+    var isHoje = ehMesAtual && hoje.getDate() === dia;
+
+    var eventosHTML = '';
+    for (var j = 0; j < eventosDoDia.length; j++) {
+      var evento = eventosDoDia[j];
+      var cor = obterCorEvento(evento.id);
+      var horaTexto = evento.hora ? evento.hora + ' · ' : '';
+      eventosHTML += '<div class="evento-pill" data-id="' + evento.id + '" style="background-color:' + cor + '">' +
+                       horaTexto + evento.nome +
+                     '</div>';
+    }
+
+    var classeQuadrado = 'dia-quadrado';
+    if (isHoje) { classeQuadrado += ' hoje'; }
+    
+    var classeNumero = 'numero-dia';
+    if (isHoje) { classeNumero += ' numero-hoje'; }
+
+    el.innerHTML += '<div class="' + classeQuadrado + '" data-dia="' + dia + '">' +
+                      '<span class="' + classeNumero + '">' + dia + '</span>' +
+                      '<div class="eventos-lista">' + eventosHTML + '</div>' +
+                    '</div>';
+  }
+
+  var pills = el.querySelectorAll('.evento-pill');
+  for (var k = 0; k < pills.length; k++) {
+    (function(pill) {
+      pill.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var id = pill.dataset.id;
+        
+        var eventoEncontrado = null;
+        for (var m = 0; m < eventos.length; m++) {
+          if (String(eventos[m].id) === id) {
+            eventoEncontrado = eventos[m];
+            break;
+          }
+        }
+        if (eventoEncontrado) {
+          abrirEdicao(eventoEncontrado);
+        }
+      });
+    })(pills[k]);
+  }
+
+  var quadrados = el.querySelectorAll('.dia-quadrado');
+  for (var k = 0; k < quadrados.length; k++) {
+    (function(quadrado) {
+      quadrado.addEventListener('click', function() {
+        var dia = quadrado.dataset.dia;
+        var mesFormatado = String(mesAtual + 1);
+        if (mesFormatado.length < 2) { mesFormatado = '0' + mesFormatado; }
+        var diaFormatado = String(dia);
+        if (diaFormatado.length < 2) { diaFormatado = '0' + diaFormatado; }
+        
+        var dataFormatada = anoAtual + '-' + mesFormatado + '-' + diaFormatado;
+        inputData.value = dataFormatada;
+        mostrarEventosDia(parseInt(dia), mesAtual, anoAtual);
+      });
+    })(quadrados[k]);
   }
 }
- 
 
-el.addEventListener('click', (e) => {
-  const eventoEl = e.target.closest('.evento');
-  if (!eventoEl) return;
- 
-  const id = eventoEl.dataset.id;
-  const evento = eventos.find(ev => String(ev.id) === id);
-  if (!evento) return;
- 
-  abrirEdicao(evento);
-});
- 
+function mostrarEventosDia(dia, mes, ano) {
+  var eventosDoDia = buscarEventosDoDia(dia, mes, ano);
+  if (eventosDoDia.length === 0) {
+    eventosHoje.style.display = 'none';
+    return;
+  }
+  eventosHoje.style.display = 'block';
+  listaEventosHoje.innerHTML = '';
+  
+  for (var i = 0; i < eventosDoDia.length; i++) {
+    var evento = eventosDoDia[i];
+    var cor = obterCorEvento(evento.id);
+    var card = document.createElement('div');
+    card.className = 'evento-card-mini';
+    
+    var horaHTML = evento.hora ? '<span class="evento-mini-hora">' + evento.hora + '</span>' : '';
+    card.innerHTML = '<span class="evento-cor-dot" style="background:' + cor + '"></span>' +
+                     '<span class="evento-mini-info">' +
+                       '<strong>' + evento.nome + '</strong>' + horaHTML +
+                     '</span>' +
+                     '<button class="btn-editar-mini" data-id="' + evento.id + '" title="Editar">✏</button>';
+    
+    listaEventosHoje.appendChild(card);
+  }
+
+  var botoesEditar = listaEventosHoje.querySelectorAll('.btn-editar-mini');
+  for (var i = 0; i < botoesEditar.length; i++) {
+    (function(btn) {
+      btn.addEventListener('click', function() {
+        var eventoEncontrado = null;
+        for (var j = 0; j < eventos.length; j++) {
+          if (String(eventos[j].id) === btn.dataset.id) {
+            eventoEncontrado = eventos[j];
+            break;
+          }
+        }
+        if (eventoEncontrado) {
+          abrirEdicao(eventoEncontrado);
+        }
+      });
+    })(botoesEditar[i]);
+  }
+}
+
 function abrirEdicao(evento) {
   eventoEmEdicaoId = evento.id;
   inputTitulo.value = evento.nome;
@@ -102,82 +228,87 @@ function abrirEdicao(evento) {
   eventoTitulo.textContent = 'Editar Evento';
   btnExcluir.style.display = 'inline-block';
 }
- 
+
 function abrirCriacao() {
   eventoEmEdicaoId = null;
   eventoTitulo.textContent = 'Novo Evento';
   btnExcluir.style.display = 'none';
+  eventosHoje.style.display = 'none';
 }
- 
+
 function limparFormulario() {
   inputTitulo.value = '';
   inputData.value = '';
   inputHora.value = '';
   abrirCriacao();
 }
- 
-botaoProximo.addEventListener('click', () => {
+
+botaoProximo.addEventListener('click', function() {
   mesAtual++;
-  if (mesAtual > 11) {
-    mesAtual = 0;
-    anoAtual++;
-  }
+  if (mesAtual > 11) { mesAtual = 0; anoAtual++; }
   atualizarCalendario(mesAtual, anoAtual);
 });
- 
-botaoAnterior.addEventListener('click', () => {
+
+botaoAnterior.addEventListener('click', function() {
   mesAtual--;
-  if (mesAtual < 0) {
-    mesAtual = 11;
-    anoAtual--;
-  }
+  if (mesAtual < 0) { mesAtual = 11; anoAtual--; }
   atualizarCalendario(mesAtual, anoAtual);
 });
- 
-btnSalvar.addEventListener('click', () => {
-  const nomeEvento = inputTitulo.value.trim();
-  const dataEvento = inputData.value;
-  const horaEvento = inputHora.value;
- 
+
+btnSalvar.addEventListener('click', function() {
+  var nomeEvento = inputTitulo.value.trim();
+  var dataEvento = inputData.value;
+  var horaEvento = inputHora.value;
+
   if (!nomeEvento || !dataEvento) {
     alert('Preencha pelo menos o título e a data do evento.');
     return;
   }
- 
+
   if (eventoEmEdicaoId !== null) {
-    const evento = eventos.find(ev => ev.id === eventoEmEdicaoId);
-    if (evento) {
-      evento.nome = nomeEvento;
-      evento.data = dataEvento;
-      evento.hora = horaEvento;
+    var eventoEncontrado = null;
+    for (var i = 0; i < eventos.length; i++) {
+      if (eventos[i].id === eventoEmEdicaoId) {
+        eventoEncontrado = eventos[i];
+        break;
+      }
+    }
+    if (eventoEncontrado) {
+      eventoEncontrado.nome = nomeEvento;
+      eventoEncontrado.data = dataEvento;
+      eventoEncontrado.hora = horaEvento;
     }
   } else {
     eventos.push(new Evento(nomeEvento, dataEvento, horaEvento));
   }
- 
+
   salvarNoLocalStorage();
   atualizarCalendario(mesAtual, anoAtual);
   limparFormulario();
 });
- 
 
-btnExcluir.addEventListener('click', () => {
+btnExcluir.addEventListener('click', function() {
   if (eventoEmEdicaoId === null) return;
- 
-  const index = eventos.findIndex(ev => ev.id === eventoEmEdicaoId);
+  
+  var index = -1;
+  for (var i = 0; i < eventos.length; i++) {
+    if (eventos[i].id === eventoEmEdicaoId) {
+      index = i;
+      break;
+    }
+  }
   if (index !== -1) {
     eventos.splice(index, 1);
   }
- 
   salvarNoLocalStorage();
   atualizarCalendario(mesAtual, anoAtual);
   limparFormulario();
 });
- 
 
-btnCancelar.addEventListener('click', () => {
+btnCancelar.addEventListener('click', function() {
   limparFormulario();
 });
+
 eventos = carregarDoLocalStorage();
 abrirCriacao();
 atualizarCalendario(mesAtual, anoAtual);

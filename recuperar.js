@@ -1,6 +1,10 @@
 function carregarUsuarios() {
-  const salvo = localStorage.getItem("plannerUnirio_usuarios");
-  return salvo ? JSON.parse(salvo) : [];
+  var salvo = localStorage.getItem("plannerUnirio_usuarios");
+  if (salvo) {
+    return JSON.parse(salvo);
+  } else {
+    return [];
+  }
 }
 
 function salvarUsuarios(usuarios) {
@@ -11,18 +15,24 @@ function mostrarErro(id, msg) {
   document.getElementById(id).textContent = msg;
 }
 
-const etapa1 = document.getElementById("etapa-1");
-const etapa2 = document.getElementById("etapa-2");
-let emailAlvo = "";
+var etapa1 = document.getElementById("etapa-1");
+var etapa2 = document.getElementById("etapa-2");
+var emailAlvo = "";
 
 // Verificar email
-document.getElementById("btn-verificar").addEventListener("click", () => {
-  const erroEl = document.getElementById("erro-email");
+document.getElementById("btn-verificar").addEventListener("click", function() {
+  var erroEl = document.getElementById("erro-email");
   erroEl.textContent = "";
 
-  const email = document.getElementById("campo-email").value.trim();
-  const usuarios = carregarUsuarios();
-  const usuario = usuarios.find(u => u.email === email);
+  var email = document.getElementById("campo-email").value.trim();
+  var usuarios = carregarUsuarios();
+  var usuario = null;
+  for (var i = 0; i < usuarios.length; i++) {
+    if (usuarios[i].email === email) {
+      usuario = usuarios[i];
+      break;
+    }
+  }
 
   if (!usuario) {
     erroEl.textContent = "E-mail não encontrado.";
@@ -35,16 +45,16 @@ document.getElementById("btn-verificar").addEventListener("click", () => {
 });
 
 // Redefinir senha
-document.getElementById("btn-redefinir").addEventListener("click", () => {
-  const errSenha = document.getElementById("erro-nova-senha");
-  const errConfirmar = document.getElementById("erro-confirmar");
+document.getElementById("btn-redefinir").addEventListener("click", function() {
+  var errSenha = document.getElementById("erro-nova-senha");
+  var errConfirmar = document.getElementById("erro-confirmar");
   errSenha.textContent = "";
   errConfirmar.textContent = "";
 
-  const novaSenha = document.getElementById("campo-nova-senha").value;
-  const confirmar = document.getElementById("campo-confirmar").value;
+  var novaSenha = document.getElementById("campo-nova-senha").value;
+  var confirmar = document.getElementById("campo-confirmar").value;
 
-  let valido = true;
+  var valido = true;
 
   if (novaSenha.length < 6) {
     errSenha.textContent = "A senha deve ter pelo menos 6 caracteres.";
@@ -58,10 +68,19 @@ document.getElementById("btn-redefinir").addEventListener("click", () => {
 
   if (!valido) return;
 
-  const usuarios = carregarUsuarios();
-  const usuario  = usuarios.find(u => u.email === emailAlvo);
-  usuario.senha  = novaSenha;
-  salvarUsuarios(usuarios);
+  var usuarios = carregarUsuarios();
+  var usuario = null;
+  for (var i = 0; i < usuarios.length; i++) {
+    if (usuarios[i].email === emailAlvo) {
+      usuario = usuarios[i];
+      break;
+    }
+  }
+
+  if (usuario) {
+    usuario.senha = novaSenha;
+    salvarUsuarios(usuarios);
+  }
 
   alert("Senha redefinida com sucesso!");
   window.location.href = "login.html";
